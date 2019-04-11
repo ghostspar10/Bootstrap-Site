@@ -69,12 +69,11 @@
           <div class="col p-4 d-flex flex-column position-static">
             <h3 class="mb-0">Featured Card</h3>
             <br>
-            <p class="card-text mb-auto">One of my absolute favorite monsters in the game. Non-targeting banish is just plain fun.
-            </p>
-            <a href="https://yugioh.fandom.com/wiki/Doomking_Balerdroch" class="stretched-link">View More</a>
+            <p class="card-text mb-auto" id="featured-text"></p>
+            <a href="#" class="stretched-link" id="featured-card">View More</a>
           </div>
           <div class="col-auto d-none d-lg-block">
-            <img src="images/doomking.png" width="172" height="250" />
+            <img src="#" width="172" height="250" id="featured-pic" />
           </div>
         </div>
       </div>
@@ -138,10 +137,14 @@
           <img src="images/bunny.png" style="margin-bottom: 20px;" />
           <img src="images/bigfoot.jpg" style="margin-bottom: 20px;" />
 
-          <p> Personally, I think the entire archetype just needs to go. As long as they exist, they'll be abused one way or 
-            another to do some degenerate strategy. They discourage creative deckbuilding by being so generically splashable, 
-            and discourage strategic play by being completely RNG based. Not to mention that the cost to build the engine is actually 
-            insane, leaving them out of reach for many a budget player. For a much healthier Yu-Gi-Oh!, the Danger!s must become as actual 
+          <p> Personally, I think the entire archetype just needs to go. As long as they exist, they'll be abused one
+            way or
+            another to do some degenerate strategy. They discourage creative deckbuilding by being so generically
+            splashable,
+            and discourage strategic play by being completely RNG based. Not to mention that the cost to build the
+            engine is actually
+            insane, leaving them out of reach for many a budget player. For a much healthier Yu-Gi-Oh!, the Danger!s
+            must become as actual
             cryptids: Non-existent.
           </p>
 
@@ -304,6 +307,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <script src="js/index.js" type="text/javascript" onload="featuredFunction()"></script>
 </body>
 
 </html>
