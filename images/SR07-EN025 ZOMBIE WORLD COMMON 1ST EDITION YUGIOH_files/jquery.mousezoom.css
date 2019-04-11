@@ -1,0 +1,31 @@
+.mousezoom-viewport{
+	position:absolute;
+	z-index:1010;
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-attachment:scroll;
+	border:3px solid #888;
+	cursor:move !important;
+}
+.mousezoom-glassoverlay{
+	position:absolute;
+	z-index:1020;
+	border:1px solid #eee;
+	background:url(images/white50.png) left top repeat scroll;
+	overflow:hidden;
+	cursor:move;
+}
+.mousezoom-glass{
+	position:absolute;
+	z-index:1030;
+	border:1px solid #ccc;
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-attachment:scroll;
+	/*box-shadow:0 0 2px #000 inset;*/
+}
+.mousezoom-loading{
+	position:absolute;
+	z-index:1020;
+	background:#fff url(images/loading.gif) center center no-repeat scroll;
+}

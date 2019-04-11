@@ -1,0 +1,340 @@
+(function($){
+	$.fn.mouseZoom = function(options){
+		options = $.extend({
+			offsetX: 0, //Viewport offset x.
+			offsetY: 0, //Viewport ofset y.
+			glass: false, //Show zoomed area under cursor.
+			position: 'none',
+			closeDelay: 125,
+			loadingDelay: 200,
+			fadeDurration: 500,
+			moveType: 'box', //'box' is more smooth in MSIE, especially with glass. 'mouse' also available.
+			onChange: function(){}
+		}, options);
+		var elements = $(this);
+		
+		if (elements.length == 0) return;
+		var images = [];
+		var getImages = function(){
+			images = [];
+			elements.each(function(index){
+				var element = $(this);
+				images.push({
+					full: {src: element.attr('href')},
+					large: {src: element.attr('data-largeimg')},
+					thumb: {src: element.attr('data-thumbnailimg')},
+					id: element.attr('id'),
+					position: index
+				});
+
+				if ((element.width() == 0 && element.height() == 0) || element.css('display') == 'flex') {
+					options.glass = false;
+				}
+			});
+		};
+		getImages();
+
+		var defaultPos = 0;
+		for(var i = 0; i < images.length; i++) {
+			if(images[i].id == "_EKM_PRODUCTIMAGE_LINK_1")
+			{
+				defaultPos = images[i].position;
+			}
+		}
+		var currentElement = defaultPos;
+		var viewport = $('<div class="mousezoom-viewport" />');
+		viewport.bind('click', function(){
+			var element = elements.eq(defaultPos);
+			var f = function(){
+				if (element.attr('data-opentype') != 'popup') window.location.href = element.attr('href');
+			};
+			element.bind('click', f).trigger('click').unbind('click', f);
+		});
+		var glass = $('<div class="mousezoom-glass" />');
+		var glassOverlay = $('<div class="mousezoom-glassoverlay" />');
+		var loading = $('<div class="mousezoom-loading" />');
+		glassOverlay.append(glass);
+		var loadingTimer;
+		var isLoading = false;
+		var showLoading = function(){
+			loadingTimer = setTimeout(function(){
+				var element = elements.eq(0);
+				var img = element.find('img');
+				var offset = img.offset();
+				loading.css({
+					left: offset.left + 'px',
+					top: offset.top + 'px'
+				});
+				loading.width(img.width());
+				loading.height(img.height());
+				element.append(loading);
+				isLoading = true;
+			}, options.loadingDelay);
+		};
+		var hideLoading = function(){
+			if (isLoading){
+				loading.detach();
+				isLoading = false;
+			}
+			else {
+				clearTimeout(loadingTimer);
+			}
+		};
+		/*
+		jQuery does not always report border-width as a pixel value in all browsers (MSIE),
+		so getOffsetBorder encapsulates a fix.
+		*/
+		var getBorderOffset = function(jElement){
+			var element = jElement[0];
+			var left = parseInt(jElement.css('borderLeftWidth'));
+			if (isNaN(left)) left = (element.currentStyle) ? parseInt(element.currentStyle['borderLeftWidth']) : 0;
+			var top = parseInt(jElement.css('borderTopWidth'));
+			if (isNaN(top)) top = (element.currentStyle) ? parseInt(element.currentStyle['borderTopWidth']) : 0;
+			return {left :left, top: top};
+		};
+		var onMousemove1 = function(event){
+			var image = images[currentElement];
+			var element = elements.eq(0);
+			var offset = element.find('img').offset();
+			var x = Math.round(((event.pageX - offset.left) / image.large.width) * 100);
+			var y = Math.round(((event.pageY - offset.top) / image.large.height) * 100);
+			viewport.css('backgroundPosition', x + '% ' + y + '%');
+			if (options.glass){
+				var x2 = (image.large.width - glass.width()) * (x / 100);
+				var y2 = (image.large.height - glass.height()) * (y / 100);
+				var border = getBorderOffset(glass);
+				glass.css({
+					'backgroundPosition': -x2 + 'px ' + -y2 + 'px',
+					'left': x2 - border.left,
+					'top': y2 - border.top
+				});
+			}
+		}
+		var onMousemove2 = function(event){
+			var image = images[currentElement];
+			var element = elements.eq(defaultPos);
+			var img = element.find('img');
+			var imgWidth = img[0].width;
+			var imgHeight = img[0].height;
+			var offset = img.offset();
+			var r = imgWidth / image.full.width;
+			var glassWidth = Math.round(imgWidth * r);
+			var glassHeight = Math.round(imgHeight * r);
+			var x = (event.pageX - offset.left) - (glassWidth / 2);
+			var y = (event.pageY - offset.top) - (glassHeight / 2);
+			var right = imgWidth - glassWidth;
+			var bottom = imgHeight - glassHeight;
+			if (x < 0) x = 0;
+			if (x > right) x = right;
+			if (y < 0) y = 0;
+			if (y > bottom) y = bottom;
+			viewport.css('backgroundPosition', Math.round((x / right) * 100) + '% ' + Math.round((y / bottom) * 100) + '%');
+			if (options.glass){
+				var border = getBorderOffset(glass);
+				x = Math.round(x);
+				y = Math.round(y);
+				glass.css({
+					'backgroundPosition': ((-x / right) * (image.large.width - glassWidth)) + 'px ' + ((-y / bottom) * (image.large.height - glassHeight)) + 'px',
+					'left': x - border.left,
+					'top': y - border.top
+				});
+			}
+		};
+
+		var onMousemove = (options.moveType == 'box')? onMousemove2 : onMousemove1;
+		var showZoom = function(){
+			hideLoading();
+			var image = images[currentElement];
+			if (image.large.width >= image.full.naturalWidth) return;
+			viewport.stop(true, true).show();
+			var element = elements.eq(defaultPos);
+			var img = element.find('img');
+			var offset = img.offset();
+			var position = img.position();
+			var imgWidth = img[0].width;
+			var imgHeight = img[0].height;
+			$(document.body).append(viewport);
+			var border = getBorderOffset(viewport);
+			var positioning = 0;
+
+			if (options.position === 'left') {
+				positioning = imgWidth * -1;
+			} else if (options.position === 'right') {
+				positioning = imgWidth;
+			}
+
+			viewport.css({
+				left: (offset.left + positioning + options.offsetX - border.left) + 'px',
+				top: (offset.top + options.offsetY - border.top) + 'px'
+			});
+			viewport.width(imgWidth);
+			viewport.height(imgHeight);
+			viewport.css('backgroundImage', 'url(' + image.full.src + ')');
+			$(document).bind('mousemove', onMousemove);
+			if (options.glass){
+				element.append(glassOverlay);
+				glassOverlay.width(imgWidth);
+				glassOverlay.height(imgHeight);
+				border = getBorderOffset(glassOverlay);
+				glassOverlay.css({
+					left: (position.left - border.left) + 'px',
+					top: (position.top - border.top) + 'px'					 
+				});
+				var r = imgWidth / image.full.width;
+				glass.width(imgWidth * r);
+				glass.height(imgHeight * r);
+				glass.css({
+					'backgroundImage': 'url(' + image.large.src + ')',
+					'left': (imgWidth * 2) + 'px',
+					'top': (imgHeight * 2) + 'px'
+				});
+			}
+		};
+
+		var calculateOffsetX = function(options, image, offset, border) {
+			var offsetFormula = offset.left + options.offsetX - border.left;
+
+			if (
+				options.position === 'undefined'
+				|| options.position === null
+				|| options.position === 'none'
+				|| options.position === 'center'
+				) {
+					return offsetFormula + 'px';
+			}
+
+			if (options.position === 'right') {
+				return (image.large.width + offsetFormula) + 'px';
+			} else if (options.position === 'left') {
+				return ((0 - image.large.width) + offsetFormula) + 'px';
+			} else {
+				return offsetFormula + 'px';
+			}
+		}
+
+		var loadImage = function(index, size, fn){
+			if (images[index][size].cached){
+				if (typeof(fn) == 'function') fn();
+				return;
+			}
+			var image = images[index][size].img = new Image();
+			image.onload = function(){
+				var obj = images[index][size];
+				obj.width = image.width;
+				obj.height = image.height;
+				obj.cached = true;
+				image.onload = function(){};
+				if (typeof(fn) == 'function') fn();
+			};
+			image.src = images[index][size].src;
+		};
+		loadImage(defaultPos, 'large');
+		elements.eq(0).data('refreshImages', function(){
+			getImages();
+			loadImage(defaultPos, 'large');
+			currentElement = defaultPos;
+		});
+		var assignAttributes = function(element, obj, size){
+			element.attr('href', obj.full.src);
+			var image = obj[size];
+			element.find('img').attr({
+				src: image.src,
+				width: image.width,
+				height: image.height
+			});
+		};
+		var getImageByPosition = function(p){
+			for (var i=0; i<images.length; i++){
+				if (images[i].position == p) return i;
+			}
+		};
+		var callChangeCallback = function(limit, callback){
+			var count = 0;
+			return function(){
+				count++;
+				if (count === limit) callback();
+			};
+		};
+		var changeElement = function(index){
+			var element1 = elements.eq(defaultPos);
+			var index1 = getImageByPosition(index);
+			var image1 = images[index1];
+			if (!image1.full.src) return;
+
+			var fns = callChangeCallback(2, function(){
+				if (typeof options.onChange === 'function'){
+					options.onChange.call();
+				}
+			});
+			loadImage(index1, 'large', function(){
+				assignAttributes(element1, image1, 'large');
+				fns();
+			});
+			var element2 = elements.eq(index);
+			var index2 = getImageByPosition(defaultPos);
+			var image2 = images[index2];
+			if(index != defaultPos) {
+				loadImage(index2, 'thumb', function(){
+					assignAttributes(element2, image2, 'thumb');
+					fns();
+				});
+			}
+			
+			images[index1].position = defaultPos;
+			images[index2].position = index;
+			currentElement = index1;
+		};
+		var closeTimer;
+		var closeTimerSet = false;
+		var closeViewport = function(){
+			closeTimerSet = false;
+			viewport.fadeOut(options.fadeDurration, function(){
+				viewport.detach();
+			});
+			$(document).unbind('mousemove', onMousemove);
+			if (options.glass) glassOverlay.detach();
+		};
+		var isMouseOver = false;
+		var onMouseleave = function(){
+			if (!isMouseOver) return
+			isMouseOver = false;
+			if(!closeTimerSet) {
+				closeTimer = setTimeout(closeViewport, options.closeDelay);
+				closeTimerSet = true;
+			}
+		};
+		var onMouseenter = function(){
+			if (isMouseOver) return
+			isMouseOver = true;
+			if (closeTimerSet) {
+				clearTimeout(closeTimer);
+				closeTimerSet = false;
+				return;
+			}
+			showLoading();
+			loadImage(currentElement, 'full', showZoom);
+		}
+		elements.eq(defaultPos).bind({
+			'mouseenter': onMouseenter,
+			'mouseleave': onMouseleave
+		});
+		if (elements.eq(defaultPos).attr('data-opentype') == 'popup') elements.eq(defaultPos).bind('click', function(event){
+			event.preventDefault();
+		});
+		viewport.bind({
+			'mouseenter': onMouseenter,
+			'mouseleave': onMouseleave
+		});
+		if (options.glass) glassOverlay.bind('mouseleave', onMouseleave);
+		elements.each(function(index){
+			if ($(this).attr("id") != "_EKM_PRODUCTIMAGE_LINK_1") {
+				$(this).bind('click', function(event){
+					event.preventDefault();
+					event.stopImmediatePropagation();
+					changeElement(index);
+				});
+			}
+		});
+		return this;
+	}
+})(ekm.$);

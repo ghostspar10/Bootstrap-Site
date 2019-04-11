@@ -1,0 +1,450 @@
+﻿@media (min-width: 980px) {  
+    /* Grid Styles - Table of contents
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    - #Container Spacing
+    - #Flex Spacing
+    - #Desktop Column Widths
+    - #Utility Spacing
+    - #Typography 
+    - #Main Content Container Styles   
+    */  
+
+
+
+    /* #Container Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */   
+    .container {
+        padding-left: 4.4rem;
+        padding-right: 4.4rem;
+    }
+
+    .container-narrow {
+        padding-left: 32rem;
+        padding-right: 32rem;
+    }
+
+
+
+    /* #Flex Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */   
+    .flex-grid {margin-left: -3rem;}
+
+    .flex-col {padding-left: 3rem;}
+
+
+
+    /* #Desktop Column Widths
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */   
+    .d-col-1 {
+        flex-basis: 8.333%;
+        max-width: 8.333%;
+        -ms-flex-preferred-size: 8.333%;
+    }
+
+    .d-col-2 {
+        flex-basis: 16.66%;
+        max-width: 16.66%;
+        -ms-flex-preferred-size: 16.66%;
+    }
+
+    .d-col-3, 
+    .d-col-thirds, 
+    .ekm-filterby-form {
+        flex-basis: 25%;
+        max-width: 25%;
+        -ms-flex-preferred-size: 25%;
+    }
+
+    .d-col-4, 
+    .d-col-quarters {
+        flex-basis: 33.33%;
+        max-width: 33.33%;
+        -ms-flex-preferred-size: 33.33%;
+    }
+
+    .d-col-5 {
+        flex-basis: 41.66%;
+        max-width: 41.66%;
+        -ms-flex-preferred-size: 41.66%;
+    }
+
+    .d-col-6, 
+    .d-col-halfs {
+        flex-basis: 50%;
+        max-width: 50%;
+        -ms-flex-preferred-size: 50%;
+    }
+
+    .d-col-7 {
+        flex-basis: 58.33%;
+        max-width: 58.33%;
+        -ms-flex-preferred-size: 58.33%;
+    }
+
+    .d-col-8 {
+        flex-basis: 66.66%;
+        max-width: 66.66%;
+        -ms-flex-preferred-size: 66.66%;
+    }
+
+    .d-col-9 {
+        flex-basis: 75%;
+        max-width: 75%;
+        -ms-flex-preferred-size: 75%;
+    }
+
+    .d-col-10 {
+        flex-basis: 83.33%;
+        max-width: 83.33%;
+        -ms-flex-preferred-size: 83.33%;
+    }
+
+    .d-col-11 {
+        flex-basis: 91.66%;
+        max-width: 91.66%;
+        -ms-flex-preferred-size: 91.66%;
+    }
+
+    .d-col-12, 
+    .d-col-full {
+        flex-basis: 100%;
+        max-width: 100%;
+        -ms-flex-preferred-size: 100%;
+    }
+
+
+
+    /* #Utility Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    /* Margin Top Utilities */
+    .s-margin-top-d 					{margin-top: 1.2rem;}
+    .m-margin-top-d 					{margin-top: 2rem;}
+    .l-margin-top-d 					{margin-top: 3rem;}
+    .xl-margin-top-d 				    {margin-top: 6rem;}
+
+    /* Margin Right Utilities */
+    .s-margin-right-d 					{margin-right: 1.2rem;}
+    .m-margin-right-d 	 			 	{margin-right: 2rem;}
+    .l-margin-right-d 					{margin-right: 3rem;}
+    .xl-margin-right-d 					{margin-right: 6rem;}
+
+    /* Margin Bottom Utilities */
+    .s-margin-bottom-d 					{margin-bottom: 1.2rem;}
+    .m-margin-bottom-d 					{margin-bottom: 2rem;}
+    .l-margin-bottom-d 					{margin-bottom: 3rem;}
+    .xl-margin-bottom-d					{margin-bottom: 6rem;}
+
+    /* Margin Left Utilities */
+    .s-margin-left-d 					{margin-left: 1.2rem;}
+    .m-margin-left-d 					{margin-left: 2rem;}
+    .l-margin-left-d 					{margin-left: 3rem;}
+    .xl-margin-left-d 					{margin-left: 6rem;}
+
+    /* Padding Top Utilities */
+    .s-padding-top-d 					{padding-top: 1.2rem;}
+    .m-padding-top-d 					{padding-top: 2rem;}
+    .l-padding-top-d 					{padding-top: 3rem;}
+    .xl-padding-top-d 					{padding-top: 6rem;}
+
+    /* Padding Right Utilities */
+    .s-padding-right-d 					{padding-right: 1.2rem;}
+    .m-padding-right-d 					{padding-right: 2rem;}
+    .l-padding-right-d 					{padding-right: 3rem;}
+    .xl-padding-right-d 				{padding-right: 6rem;}
+
+    /* Padding Bottom Utilities */
+    .s-padding-bottom-d 				{padding-bottom: 1.2rem;}
+    .m-padding-bottom-d 				{padding-bottom: 2rem;}
+    .l-padding-bottom-d 				{padding-bottom: 3rem;}
+    .xl-padding-bottom-d				{padding-bottom: 6rem;}
+
+    /* Padding Left Utilities */
+    .s-padding-left-d 					{padding-left: 1.2rem;}
+    .m-padding-left-d 					{padding-left: 2rem;}
+    .l-padding-left-d 					{padding-left: 3rem;}
+    .xl-padding-left-d 					{padding-left: 6rem;}
+
+    /* Padding Full Utilities */
+    .s-padding-full-d 					{padding: 1.2rem;}
+    .m-padding-full-d 					{padding: 2rem;}
+    .l-padding-full-d 					{padding: 3rem;}
+    .xl-padding-full-d 					{padding: 6rem;}
+
+
+
+    /* #Typography 
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    h1, .h2-title {font-size: 2.6rem;}
+    h2 {font-size: 2.4rem;}
+    h3 {font-size: 2.2rem;}
+    h4 {font-size: 2.0rem;}
+    h5 {font-size: 1.8rem;}
+    h6 {font-size: 1.6rem;}
+
+
+
+    /* #Main Content Container Styles
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    .main-content, 
+    .main-content-webpage,
+    .main-content-general,
+    .main-content-cart,
+    .main-content-search,
+    .rvp-products {
+        margin-left: 12%;
+        margin-right: 12%;
+    }
+
+    .main-content, 
+    .main-content-webpage,
+    .main-content-general,
+    .main-content-search,
+    .main-content-cart {padding: 3rem 3rem 6rem 3rem;}
+
+    .rvp-products {
+    	padding-left: 3rem;
+    	padding-right: 3rem;
+    }
+}
+
+
+
+
+
+
+@media only screen and (min-width: 980px) and (max-width: 1500px) {
+    /* Grid Styles - Table of contents
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    - #Container Spacing
+    - #Main Content Container Styles   
+    */  
+    
+    
+    
+    /* #Container Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+    .container-narrow {
+        padding-left: 6rem;
+        padding-right: 6rem;
+    }
+
+
+
+    /* #Main Content Container Styles
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */ 
+    .main-content, 
+    .main-content-webpage, 
+    .main-content-general,
+    .main-content-cart,
+    .main-content-search,
+    .rvp-products {
+        margin-left: 6%;
+        margin-right: 6%;
+    } 
+}
+
+
+
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 979px) {
+    /* Grid Styles - Table of contents
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    - #Container Spacing
+    - #Flex Spacing
+    - #Mobile Column Widths
+    - #Utility Spacing
+    - #Typography 
+    - #Main Content Container Styles   
+    */  
+    
+    
+    
+    /* #Container Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.container {
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+    
+    
+    
+    /* #Flex Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.flex-grid {
+		flex-flow: row wrap;
+		margin-left: -3rem;
+	}
+		
+	.flex-col {padding-left: 3rem;}
+    
+    
+    
+    /* #Mobile Column Widths
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.m-col-3 {
+		flex-basis: 25%;
+		max-width: 25%;
+		-ms-flex-preferred-size: 25%;
+	}
+		
+	.m-col-6 {
+		flex-basis: 50%;
+		max-width: 50%;
+		-ms-flex-preferred-size: 50%;
+	}
+		
+	.m-col-12 {
+		flex-basis: 100%;
+		max-width: 100%;
+		-ms-flex-preferred-size: 100%;
+	}
+    
+    
+    
+    /* #Utilities Styles
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	/* Margin Top Utilities */
+	.s-margin-top-m 					{margin-top: 0.7rem;}
+	.m-margin-top-m 					{margin-top: 1rem;}
+	.l-margin-top-m 					{margin-top: 2rem;}
+	.xl-margin-top-m 				    {margin-top: 3rem;}
+	.xxl-margin-top-m 				    {margin-top: 4rem;}
+	
+	/* Margin Right Utilities */
+	.s-margin-right-m 					{margin-right: 0.7rem;}
+	.m-margin-right-m 	 			 	{margin-right: 1rem;}
+	.l-margin-right-m 					{margin-right: 2rem;}
+	.xl-margin-right-m 					{margin-right: 3rem;}
+	.xxl-margin-right-m 			    {margin-right: 4rem;}
+	
+	/* Margin Bottom Utilities */
+	.s-margin-bottom-m 					{margin-bottom: 0.7rem;}
+	.m-margin-bottom-m 					{margin-bottom: 1rem;}
+	.l-margin-bottom-m 					{margin-bottom: 2rem;}
+	.xl-margin-bottom-m					{margin-bottom: 3rem;}
+	.xxl-margin-bottom-m			    {margin-bottom: 4rem;}
+	
+	/* Margin Left Utilities */
+	.s-margin-left-m 					{margin-left: 0.7rem;}
+	.m-margin-left-m 					{margin-left: 1rem;}
+	.l-margin-left-m 					{margin-left: 2rem;}
+	.xl-margin-left-m 					{margin-left: 3rem;}
+	.xxl-margin-left-m 				    {margin-left: 4rem;}
+	
+	/* Padding Top Utilities */
+	.s-padding-top-m 					{padding-top: 0.7rem;}
+	.m-padding-top-m 					{padding-top: 1rem;}
+	.l-padding-top-m 					{padding-top: 2rem;}
+	.xl-padding-top-m 					{padding-top: 3rem;}
+	.xxl-padding-top-m 				    {padding-top: 4rem;}
+	
+	/* Padding Right Utilities */
+	.s-padding-right-m 					{padding-right: 0.7rem;}
+	.m-padding-right-m 					{padding-right: 1rem;}
+	.l-padding-right-m 					{padding-right: 2rem;}
+	.xl-padding-right-m 				{padding-right: 3rem;}
+	.xxl-padding-right-m			    {padding-right: 4rem;}
+	
+	/* Padding Bottom Utilities */
+	.s-padding-bottom-m 				{padding-bottom: 0.7rem;}
+	.m-padding-bottom-m 				{padding-bottom: 1rem;}
+	.l-padding-bottom-m 				{padding-bottom: 2rem;}
+	.xl-padding-bottom-m				{padding-bottom: 3rem;}
+	.xxl-padding-bottom-m 				{padding-bottom: 4rem;}
+	
+	/* Padding Left Utilities */
+	.s-padding-left-m 					{padding-left: 0.7rem;}
+	.m-padding-left-m 					{padding-left: 1rem;}
+	.l-padding-left-m 					{padding-left: 2rem;}
+	.xl-padding-left-m 					{padding-left: 3rem;}
+	.xxl-padding-left-m				    {padding-left: 4rem;}
+	
+	/* Padding Full Utilities */
+	.s-padding-full-m 					{padding: 0.7rem;}
+	.m-padding-full-m 					{padding: 1rem;}
+	.l-padding-full-m 					{padding: 2rem;}
+	.xl-padding-full-m 					{padding: 3rem;}
+	.xxl-padding-full-m				    {padding: 4rem;}
+    
+    
+    
+    /* #Typography 
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	h1, .h2-title {font-size: 2rem;}
+	h2 {font-size: 1.9rem;}
+	h3 {font-size: 1.8rem;}
+	h4 {font-size: 1.7rem;}
+	h5 {font-size: 1.6rem;}
+	h6 {font-size: 1.5rem;}
+
+    
+	    
+	/* #Main Content Container Styles
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.main-content, 
+	.main-content-webpage,
+	.main-content-general,
+	.main-content-cart,
+	.main-content-search,
+	.rvp-products {padding: 2rem 2rem 4rem 2rem;}
+}
+
+
+
+
+@media only screen and (min-width: 660px) and (max-width: 1200px) {
+    /* Grid Styles - Table of contents
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    - #Tablet Column Widths 
+    */  
+    
+    
+    
+	/* #Tablet Column Widths
+	–––––––––––––––––––––––––––––––––––––––––––––––––– */
+	.t-col-3 {
+		flex-basis: 25%;
+		max-width: 25%;
+		-ms-flex-preferred-size: 25%;
+	}
+	
+	.t-col-4 {
+		flex-basis: 33.33%;
+		max-width: 33.33%;
+		-ms-flex-preferred-size: 33.33%;
+	}
+		
+	.t-col-6 {
+		flex-basis: 50%;
+		max-width: 50%;
+		-ms-flex-preferred-size: 50%;
+	}
+		
+	.t-col-12 {
+		flex-basis: 100%;
+		max-width: 100%;
+		-ms-flex-preferred-size: 100%;
+	}
+}
+
+
+
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 359px) {
+	/* Grid Styles - Table of contents
+    ––––––––––––––––––––––––––––––––––––––––––––––––––
+    - #Flex Spacing 
+    */  
+    
+    
+    
+	/* #Flex Spacing
+    –––––––––––––––––––––––––––––––––––––––––––––––––– */   
+    .flex-grid {margin-left: -2rem;}
+
+    .flex-col {padding-left: 2rem;}
+}

@@ -1,0 +1,16 @@
+//Initialise mouseZoom on elements with the rel attribute containing the string 'mousezoom'.
+(function($){
+	if(mouse_zoom_mobile_check==false) {
+
+		var o = (ekm && ekm.mousezoomOptions) ? ekm.mousezoomOptions : {};
+		o.onChange = function(){
+			if (window.ekmProductImageBadges){
+				ekmProductImageBadges.reInit();
+			}
+		};
+		$(function(){
+			$('*[rel*="mousezoom"]').mouseZoom(o);
+		});
+	}
+
+})(ekm.$);
